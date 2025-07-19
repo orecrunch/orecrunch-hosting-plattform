@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="logo" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 192.81 192.81">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: url(#Unbenannter_Verlauf_4);
+        stroke-width: 0px;
+      }
+    </style>
+    <linearGradient id="Unbenannter_Verlauf_4" data-name="Unbenannter Verlauf 4" x1="-9.04" y1="162.29" x2="201.85" y2="30.52" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#8276b5"/>
+      <stop offset="1" stop-color="#ee8caa"/>
+    </linearGradient>
+  </defs>
+  <path class="cls-1" d="m0,23.33S0,0,23.04,0,92.16,0,92.16,0v60.13H0M192.81,23.33S192.81,0,169.77,0c-23.37,0-69.12,0-69.12,0v60.13s92.16,0,92.16,0M0,72.47v47.93s43.82,0,43.82,0v-47.93H0Zm56.36,0v47.93h80.29v-47.93H56.36Zm92.22,0v47.93h44.22v-47.93h-44.22ZM0,169.48s0,23.33,23.04,23.33c23.37,0,69.12,0,69.12,0v-60.13S0,132.67,0,132.67m192.81,0h-92.16v60.13s45.74,0,69.12,0c23.04,0,23.04-23.33,23.04-23.33"/>
+</svg>
