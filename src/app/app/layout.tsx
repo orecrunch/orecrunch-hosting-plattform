@@ -1,24 +1,22 @@
 import { AppSidebar } from "@/components/sidebar/app-sidebar";
-import { Button } from "@/components/ui/button";
 import {
   SidebarInset,
   SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar";
-import { Sidebar } from "lucide-react";
-import { Suspense } from "react";
+
 
 export default function AppLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <>
-      <SidebarProvider>
-        <AppSidebar variant="inset" />
-        <SidebarInset className="overflow-clip ">
-          <SidebarTrigger className="absolute top-1.5 mx-1.5" />
+      <SidebarProvider className="">
+        <AppSidebar    className="h-full dark:bg-background bg-accent" />
+        <div className=" dark:bg-background bg-accent w-full rounded-xl">
+          <SidebarTrigger className=" sticky top-1 p-2 bg-transparent backdrop-blur-lg " />
           {children}
-        </SidebarInset>
+        </div>
       </SidebarProvider>
     </>
   );

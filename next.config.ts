@@ -3,11 +3,9 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   /* config options here */
   experimental: {
-    viewTransition: true
+    viewTransition: true,
   },
-  devIndicators: {
-    position: "bottom-right"
-  },
+  
   async redirects() {
     return [
       {
@@ -15,6 +13,11 @@ const nextConfig: NextConfig = {
         destination: '/auth/login',
         permanent: true,
       },
+      {
+        source: '/app/servers/:id',
+        destination: '/app/servers/:id/console',
+        permanent: true,
+      }
     ]
   }
 };

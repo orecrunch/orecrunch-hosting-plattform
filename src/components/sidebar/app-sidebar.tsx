@@ -16,14 +16,17 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import {
-  Command,
+
   CreditCardIcon,
-  FileQuestionIcon,
-  FileUpIcon,
+  Database,
+
+  Folder,
   HelpCircle,
   Info,
-  Link,
-  Plus,
+
+  Server,
+  Terminal,
+  Users,
 } from "lucide-react";
 import { Calendar, Home, Inbox, Search, Settings } from "lucide-react";
 import { AppSideBarUser } from "./app-sidebar-user";
@@ -34,26 +37,67 @@ import { createClient } from "@/utils/supabase/client";
 import { toast } from "sonner";
 import { UserData } from "@/models/sidebar-userdata";
 import { Skeleton } from "../ui/skeleton";
-const navbar = {
-  main: [
-    {
-      title: "Home",
-      url: "/app",
-      icon: Home,
-    },
-    {
-      title: "Payment",
-      url: "/app/payment",
-      icon: CreditCardIcon,
-    },
+let navbar = {
+  main: {
+    title: "Application",
+    availabe: "/app",
+    items: [
+      {
+        title: "Home",
+        url: "/app",
+        strict: true,
+        icon: Home,
+      },
+      {
+        title: "Servers",
+        url: "/app/servers",
+        icon: Server,
+      },
+      {
+        title: "Payment",
+        url: "/app/payment",
+        icon: CreditCardIcon,
+      },
 
-    {
-      title: "Settings",
-      url: "/app/settings",
-      icon: Settings,
-    },
-  ],
- 
+      {
+        title: "Settings",
+        url: "/app/settings",
+        icon: Settings,
+      },
+    ],
+  },
+  server: {
+    title: "Server",
+    availabe: "/app/servers/*",
+    items: [
+      {
+        title: "Console",
+        url: "console",
+        icon: Terminal,
+      },
+        {
+        title: "Files",
+        url: "files",
+        icon: Folder,
+      },
+      {
+        title: "Database",
+        url: "files",
+        icon: Database,
+      },
+      {
+        title: "Users",
+        url: "users",
+        icon: Users,
+      },
+
+      {
+        title: "Settings",
+        url: "settings",
+        icon: Settings,
+      },
+    ],
+  },
 };
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
@@ -67,8 +111,8 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 
     if (error) throw error;
 
-    const email = data.session?.user.email ?? ""
-    const metadata = data.session?.user.user_metadata ?? {}
+    const email = data.session?.user.email ?? "";
+    const metadata = data.session?.user.user_metadata ?? {};
 
     return {
       avatar: metadata["picture"] ?? metadata["avatar_url"] ?? "",
@@ -77,47 +121,56 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     };
   }
 
+  function isActive(item_url: string): boolean {
+    return pathname.endsWith(item_url);
+  }
+
   useEffect(() => {
     getUserData()
       .then((data) => setUserData(data))
       .catch((e) => toast(e.message));
   }, []);
 
+  const entries = Object.entries(navbar);
   return (
-    <Sidebar {...props}>
-      <SidebarHeader>
+    <Sidebar {...props} variant="floating">
+      <SidebarHeader >
         <SidebarMenu>
           <SidebarMenuItem>
-            <SidebarMenuButton
-              asChild
-              className="data-[slot=sidebar-menu-button]:!p-1.5 "
-            >
-              <div>
+          
+              <div className="flex gap-2 m-2 mt-4">
                 <Image src={Logo} alt={""} className="!size-6" />
                 <span className="text-base font-semibold">OreCrunch.</span>
               </div>
-            </SidebarMenuButton>
+      
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarHeader>
       <SidebarContent>
-        <SidebarGroup>
-          <SidebarGroupLabel>Application</SidebarGroupLabel>
-          <SidebarGroupContent>
-            <SidebarMenu>
-              {navbar.main.map((item) => (
-                <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild isActive={item.url === pathname}>
-                    <a onClick={() => router.push(item.url)}>
-                      <item.icon />
-                      <span>{item.title}</span>
-                    </a>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              ))}
-            </SidebarMenu>
-          </SidebarGroupContent>
-        </SidebarGroup>
+        {entries.map((entry) => {
+          if (!pathname.startsWith(entry[1].availabe.replaceAll("*", ""))) {
+            return null;
+          }
+          return (
+            <SidebarGroup key={entry[0]}>
+              <SidebarGroupLabel>{entry[1].title}</SidebarGroupLabel>
+              <SidebarGroupContent>
+                <SidebarMenu>
+                  {entry[1].items.map((item) => (
+                    <SidebarMenuItem key={item.title}>
+                      <SidebarMenuButton asChild isActive={isActive(item.url)}>
+                        <a onClick={() => router.push(item.url)}>
+                          <item.icon />
+                          <span>{item.title}</span>
+                        </a>
+                      </SidebarMenuButton>
+                    </SidebarMenuItem>
+                  ))}
+                </SidebarMenu>
+              </SidebarGroupContent>
+            </SidebarGroup>
+          );
+        })}
         <SidebarGroup className="mt-auto">
           <SidebarGroupContent>
             <SidebarMenuButton asChild>

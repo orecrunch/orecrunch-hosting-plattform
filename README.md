@@ -1,6 +1,6 @@
 # Server-Hosting plattform.
 This is the internal Server-Hosting plattform. It uses [Next.js](https://nextjs.org) as the fullstack framework enviroment and [Supabase](https://supabase.com) as the database and authentication backend.
-It is used to manage the wings, payment and UI/UX for OreCrunch. 
+It is used to manage the wings, payment and general UI/UX for OreCrunch. 
 
 ## Getting Started
 

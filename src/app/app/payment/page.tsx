@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 
-import { startTransition, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { toast, Toaster } from "sonner";
 import { Product } from "@/models/ui-product";
 import GetProducts from "@/app/actions/get-products";
@@ -15,17 +15,17 @@ export default function PaymentPage() {
   const [products, setProducts] = useState<Product[]>([]);
   const [pending, setPending] = useState(false);
 
-  function onPay(price: string) {
+  async function onPay(price: string) {
     setPending(true);
-    startTransition(async () => {
+ 
       try {
-        await RedirectToStripe(price);
+        await RedirectToStripe(price)
       } catch (err: any) {
         toast.error(err.message || "Failed to redirect to Stripe");
       } finally {
         setPending(false);
       }
-    });
+
   }
 
 
@@ -43,7 +43,6 @@ export default function PaymentPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 ">
             {products.map((product) => (
               <Button
-     
                 variant="outline"
                 key={product.Id}
                 disabled={pending}
