@@ -1,9 +1,9 @@
 "use server";
 
 import { Product } from "@/models/ui-product";
-import { createStripeClient } from "@/utils/stripe/server";
+import { stripe} from "@/utils/stripe/server";
 import Stripe from "stripe";
-const stripe = createStripeClient();
+
 
 export default async function GetProducts(): Promise<Product[]> {
   const { data } = await stripe.products.list({

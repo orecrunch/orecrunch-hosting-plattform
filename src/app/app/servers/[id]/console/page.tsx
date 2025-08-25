@@ -9,7 +9,7 @@ export default async function ServerPage({
 }) {
   const { id } = await params;
   return (
-    <div className="h-full flex flex-col ">
+    <div className="w-full h-full max-w-[110rem] flex flex-col ">
       <ConsolePage serverId={id} />
     </div>  
   );

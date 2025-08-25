@@ -50,6 +50,9 @@ importers:
       '@radix-ui/react-tooltip':
         specifier: ^1.2.7
         version: 1.2.7(@types/react-dom@19.1.6(@types/react@19.1.8))(@types/react@19.1.8)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      '@stripe/stripe-js':
+        specifier: ^7.8.0
+        version: 7.8.0
       '@supabase/ssr':
         specifier: ^0.6.1
         version: 0.6.1(@supabase/supabase-js@2.50.2)
@@ -105,11 +108,14 @@ importers:
         specifier: ^2.0.6
         version: 2.0.6(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       stripe:
-        specifier: ^18.3.0
-        version: 18.3.0(@types/node@20.19.4)
+        specifier: ^18.4.0
+        version: 18.4.0(@types/node@20.19.4)
       tailwind-merge:
         specifier: ^3.3.1
         version: 3.3.1
+      ws:
+        specifier: ^8.18.3
+        version: 8.18.3
       zod:
         specifier: ^3.25.74
         version: 3.25.74
@@ -850,6 +856,10 @@ packages:
 
   '@standard-schema/utils@0.3.0':
     resolution: {integrity: sha512-e7Mew686owMaPJVNNLs55PUvgz371nKgwsc4vxE49zsODpJEnxgxRo2y/OKrqueavXgZNMDVj3DdHFlaSAeU8g==}
+
+  '@stripe/stripe-js@7.8.0':
+    resolution: {integrity: sha512-DNXRfYUgkZlrniQORbA/wH8CdFRhiBSE0R56gYU0V5vvpJ9WZwvGrz9tBAZmfq2aTgw6SK7mNpmTizGzLWVezw==}
+    engines: {node: '>=12.16'}
 
   '@supabase/auth-js@2.70.0':
     resolution: {integrity: sha512-BaAK/tOAZFJtzF1sE3gJ2FwTjLf4ky3PSvcvLGEgEmO4BSBkwWKu8l67rLLIBZPDnCyV7Owk2uPyKHa0kj5QGg==}
@@ -1636,8 +1646,8 @@ packages:
     resolution: {integrity: sha512-Y38VPSHcqkFrCpFnQ9vuSXmquuv5oXOKpGeT6aGrr3o3Gc9AlVa6JBfUSOCnbxGGZF+/0ooI7KrPuUSztUdU5A==}
     engines: {node: '>=8'}
 
-  stripe@18.3.0:
-    resolution: {integrity: sha512-FkxrTUUcWB4CVN2yzgsfF/YHD6WgYHduaa7VmokCy5TLCgl5UNJkwortxcedrxSavQ8Qfa4Ir4JxcbIYiBsyLg==}
+  stripe@18.4.0:
+    resolution: {integrity: sha512-LKFeDnDYo4U/YzNgx2Lc9PT9XgKN0JNF1iQwZxgkS4lOw5NunWCnzyH5RhTlD3clIZnf54h7nyMWkS8VXPmtTQ==}
     engines: {node: '>=12.*'}
     peerDependencies:
       '@types/node': '>=12.x.x'
@@ -2422,6 +2432,8 @@ snapshots:
   '@radix-ui/rect@1.1.1': {}
 
   '@standard-schema/utils@0.3.0': {}
+
+  '@stripe/stripe-js@7.8.0': {}
 
   '@supabase/auth-js@2.70.0':
     dependencies:
@@ -3216,7 +3228,7 @@ snapshots:
     dependencies:
       ansi-regex: 5.0.1
 
-  stripe@18.3.0(@types/node@20.19.4):
+  stripe@18.4.0(@types/node@20.19.4):
     dependencies:
       qs: 6.14.0
     optionalDependencies:

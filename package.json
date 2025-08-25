@@ -2,10 +2,11 @@
   "name": "orecrunch-hosting-plattform",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
-    "dev": "next dev --turbopack",
+    "dev": "node --env-file=.env ./src/server.ts",
     "build": "next build --turbopack",
-    "start": "next start",
+    "start": "node --env-file=.env ./src/server.ts",
     "lint": "next lint"
   },
   "dependencies": {
@@ -23,6 +24,7 @@
     "@radix-ui/react-slot": "^1.2.3",
     "@radix-ui/react-tabs": "^1.1.12",
     "@radix-ui/react-tooltip": "^1.2.7",
+    "@stripe/stripe-js": "^7.8.0",
     "@supabase/ssr": "^0.6.1",
     "@supabase/supabase-js": "^2.50.2",
     "@tanstack/react-table": "^8.21.3",
@@ -41,8 +43,9 @@
     "react-monaco-editor": "^0.59.0",
     "recharts": "2.15.4",
     "sonner": "^2.0.6",
-    "stripe": "^18.3.0",
+    "stripe": "^18.4.0",
     "tailwind-merge": "^3.3.1",
+    "ws": "^8.18.3",
     "zod": "^3.25.74"
   },
   "devDependencies": {

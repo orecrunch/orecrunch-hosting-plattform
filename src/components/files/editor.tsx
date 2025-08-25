@@ -1,27 +1,29 @@
 "use client";
 import { useEffect, useState } from "react";
 import MonacoEditor from "react-monaco-editor";
-import { Button } from "./ui/button";
+import { Button } from "@/components/ui/button";
 import { Toaster, toast } from "sonner";
-import FileNotFoundErr from "./file-not-found-err";
-
+import { notFound, useParams } from "next/navigation";
+import { fetchWing } from "@/utils/wing/fetch-wing";
+var test  = 1;
 export default function Editor({ post_url, fetch_url }: { fetch_url: string, post_url: string }) {
   const [content, setContent] = useState("");
   const [loading, setLoading] = useState(true);
-  const [err, setErr] = useState(true);
-  console.log(fetch_url)
-  console.log(post_url)
+
 
   async function fetchContent() {
+     
     try {
+      test++;
+      console.log("getting data" + test)
       setLoading(true)
-      const res = await fetch(
+      const res = await fetchWing(
         fetch_url
       );
       setContent(await res.text());
     } catch (e) {
       console.log(e);
-      setTimeout(() => toast.error("Sry Error while fetching file"), 400)
+      notFound();
     } finally {
      setLoading(false)
     }
@@ -29,9 +31,9 @@ export default function Editor({ post_url, fetch_url }: { fetch_url: string, pos
 
   async function postContent() {
     try {
-      const res = await fetch(
+      const res = await fetchWing(
         post_url,
-        {
+        {   
           method: "POST",
           body: content,
         }
@@ -39,6 +41,7 @@ export default function Editor({ post_url, fetch_url }: { fetch_url: string, pos
       if (res.status != 200) {
         throw "Could not save file";
       }
+      
     } catch (e) {
       console.log(e);
       setTimeout(() => toast.error("Sry Error while fetching file"), 400)
@@ -53,9 +56,9 @@ export default function Editor({ post_url, fetch_url }: { fetch_url: string, pos
     <>
     <Toaster />
     {
-      err ? 
-      <FileNotFoundErr />
-      :
+    
+      
+      
       <>
        {loading ? <div>Loading...</div> : 
       <MonacoEditor

@@ -14,7 +14,7 @@ export default function AppLayout({
       <SidebarProvider className="">
         <AppSidebar    className="h-full dark:bg-background bg-accent" />
         <div className=" dark:bg-background bg-accent w-full rounded-xl">
-          <SidebarTrigger className=" sticky top-1 p-2 bg-transparent backdrop-blur-lg " />
+          <SidebarTrigger className="sticky top-1 p-2 bg-transparent backdrop-blur-lg " />
           {children}
         </div>
       </SidebarProvider>

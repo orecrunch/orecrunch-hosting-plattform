@@ -5,8 +5,8 @@ import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
 import { toast, Toaster } from "sonner";
 import { Product } from "@/models/ui-product";
-import GetProducts from "@/app/actions/get-products";
-import { RedirectToStripe } from "@/app/actions/reditrect-to-stripe";
+import GetProducts from "@/actions/get-products";
+import { createPayment } from "@/actions/create-payment";
 import { Skeleton } from "@/components/ui/skeleton";
 
 
@@ -19,7 +19,7 @@ export default function PaymentPage() {
     setPending(true);
  
       try {
-        await RedirectToStripe(price)
+        await createPayment(price)
       } catch (err: any) {
         toast.error(err.message || "Failed to redirect to Stripe");
       } finally {

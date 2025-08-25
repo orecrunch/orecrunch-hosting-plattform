@@ -17,10 +17,10 @@ export default function FilesPage() {
     path = "/" + path;
   }
   return (
-    <>
+    <div className="w-full max-w-[80rem]">
       <h1 className="text-2xl font-semibold mb-1.5">Your Files</h1>
       <FilesBreadCrump path={path} />
       <FilesDataTable path={path} />
-    </>
+    </div>
   );
 }

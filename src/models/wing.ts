@@ -1,14 +1,24 @@
-interface User {
+export interface Files {
+  name: string;
+  size: number;
+  dir: boolean;
+};
+
+export interface FilesResponse {
+  files: Files[];
+}
+
+export interface User {
   email: string;
  
   permissions: UserPermissions;
 }
 
-interface UserPermissions {
+export interface UserPermissions {
   file_permissions: FilePermissions;
 }
 
-interface FilePermissions {
+export interface FilePermissions {
    home_dir: string;
   read: boolean;
   write: boolean;

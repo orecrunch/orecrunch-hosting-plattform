@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { formatBytes } from "@/utils/misc";
 import { Button } from "@/components/ui/button";
-import { Files } from "@/models/wing-files";
+import { Files } from "@/models/wing";
 
 export const columns: ColumnDef<Files>[] = [
   {
@@ -32,7 +32,7 @@ export const columns: ColumnDef<Files>[] = [
           onCheckedChange={(value) => row.toggleSelected(!!value)}
           aria-label="Select row"
         />
-        {row.original.dir ? <Folder className="h-5 stroke-muted-foreground dark:fill-muted-foreground"  /> : <File className="h-5 stroke-muted-foreground" />}
+        {row.original.dir ? <Folder className="h-4.5 stroke-accent-foreground dark:fill-accent-foreground"  /> : <File className="h-4.5 stroke-accent-foreground" />}
       </div>
     ),
     enableSorting: false,

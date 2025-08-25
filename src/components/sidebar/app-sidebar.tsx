@@ -1,6 +1,6 @@
 "use client";
 
-import { usePathname, useRouter } from "next/navigation";
+import { useParams, usePathname, useRouter } from "next/navigation";
 
 import {
   Sidebar,
@@ -72,28 +72,28 @@ let navbar = {
     items: [
       {
         title: "Console",
-        url: "console",
+        url: "/app/servers/[id]/console",
         icon: Terminal,
       },
         {
         title: "Files",
-        url: "files",
+        url: "/app/servers/[id]/files",
         icon: Folder,
       },
       {
         title: "Database",
-        url: "files",
+        url: "/app/servers/[id]/database",
         icon: Database,
       },
       {
         title: "Users",
-        url: "users",
+        url: "/app/servers/[id]/users",
         icon: Users,
       },
 
       {
         title: "Settings",
-        url: "settings",
+        url: "/app/servers/[id]/settings",
         icon: Settings,
       },
     ],
@@ -102,6 +102,7 @@ let navbar = {
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const pathname = usePathname();
+  const params = useParams()
   const router = useRouter();
   const [userData, setUserData] = useState<UserData>();
 
@@ -122,7 +123,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   }
 
   function isActive(item_url: string): boolean {
-    return pathname.endsWith(item_url);
+    return pathname === replaceWithParams(item_url);
   }
 
   useEffect(() => {
@@ -130,6 +131,19 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       .then((data) => setUserData(data))
       .catch((e) => toast(e.message));
   }, []);
+
+  function replaceWithParams(path :string) : string {
+    const match = path.match(/\[(.*?)\]/g);
+
+    match?.forEach((param) => {
+      const paramName = param.replace(/\[|\]/g, "");
+      if (params[paramName]) {
+        path = path.replace(param, params[paramName] as string ?? "");
+      }
+    });
+
+    return path;
+  }
 
   const entries = Object.entries(navbar);
   return (
@@ -159,7 +173,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                   {entry[1].items.map((item) => (
                     <SidebarMenuItem key={item.title}>
                       <SidebarMenuButton asChild isActive={isActive(item.url)}>
-                        <a onClick={() => router.push(item.url)}>
+                        <a onClick={() => router.push(replaceWithParams(item.url))}>
                           <item.icon />
                           <span>{item.title}</span>
                         </a>

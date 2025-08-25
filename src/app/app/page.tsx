@@ -21,19 +21,6 @@ export default function HomePage() {
 
   async function requestAccountDetail() {
 
-    try {
-      const res = await fetch("http://localhost:8080/account", {
-        
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      });
-      if (res.status != 200) throw res.statusText
-      setAccountData(JSON.stringify(await res.json()));
-    } catch (e) {
-      toast(`Fetching failed: ${e}`,);
-      return;
-    }
 
     
   }
